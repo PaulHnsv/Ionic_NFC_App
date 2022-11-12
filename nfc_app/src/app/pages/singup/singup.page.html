@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login" text="">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-color">
+  <ion-card class="ion-no-maring">
+    
+
+    <ion-card-header>
+      <ion-card-title>Inscrever-se</ion-card-title>
+      <ion-card-subtitle>Crie sua conta preechendo o formulário</ion-card-subtitle>
+    </ion-card-header>
+
+    <form [formGroup]="ValidationFormUser" (ngSubmit)="registerUser(ValidationFormUser.value)">
+      <ion-card-content>
+      <ion-item>
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-input type="text" name="names" placeholder="Nome Completo" formControlName="names">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container
+          *ngFor="let validation of validationMessages.names">
+          <div
+            class="error_message"
+            *ngIf="ValidationFormUser.get('names').hasError(validation.type) && (ValidationFormUser.get('names').dirty || ValidationFormUser.get('names').touched) "
+            >
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-icon name="card"></ion-icon>
+        <ion-input type="text" name="numeroCartao" placeholder="Número do Bilhete" formControlName="numeroCartao" minlength="9" maxlength="9">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container
+          *ngFor="let validation of validationMessages.numeroCartao">
+          <div
+            class="error_message"
+            *ngIf="ValidationFormUser.get('numeroCartao').hasError(validation.type) && (ValidationFormUser.get('numeroCartao').dirty || ValidationFormUser.get('numeroCartao').touched) "
+            >
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-icon name="document-text"></ion-icon>
+        <ion-input type="text" name="cpf" placeholder="Número do CPF" formControlName="cpf" minlength="11" maxlength="11">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container
+          *ngFor="let validation of validationMessages.cpf">
+          <div
+            class="error_message"
+            *ngIf="ValidationFormUser.get('cpf').hasError(validation.type) && (ValidationFormUser.get('cpf').dirty || ValidationFormUser.get('cpf').touched) "
+            >
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-input type="text" name="email" placeholder="Endereço de email" formControlName="email">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container
+          *ngFor="let validation of validationMessages.email">
+          <div
+            class="error_message"
+            *ngIf="ValidationFormUser.get('email').hasError(validation.type) && (ValidationFormUser.get('email').dirty || ValidationFormUser.get('email').touched) "
+            >
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input type="password" name="password" placeholder="Senha" formControlName="password">
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container
+          *ngFor="let validation of validationMessages.password">
+          <div
+            class="error_message"
+            *ngIf="ValidationFormUser.get('password').hasError(validation.type) && (ValidationFormUser.get('password').dirty || ValidationFormUser.get('password').touched) "
+            >
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="sign-btn-wrap">
+        <ion-button shape="round" fill="solid" type="submit" class="sign-btn" [disabled]="!ValidationFormUser.valid">
+          Inscrever-se
+        </ion-button>
+      </div>
+
+      <div class="text-tag">
+        <span>Se inscreva com</span>
+      </div>
+
+      </ion-card-content>
+    </form>
+  </ion-card>
+
+</ion-content>
