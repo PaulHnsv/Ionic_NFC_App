@@ -101,6 +101,7 @@ export class SingupPage implements OnInit {
               password: value.password,
               uid: response.user.uid,
               isStudent: false,
+              paypalIntegration: false,
             });
             this.loadingController.dismiss();
             this.router.navigate(['loginscreen']);
@@ -113,6 +114,7 @@ export class SingupPage implements OnInit {
               password: value.password,
               uid: response.user.uid,
               isStudent: false,
+              paypalIntegration: false,
             });
             this.loadingController.dismiss();
             this.router.navigate(['loginscreen']);

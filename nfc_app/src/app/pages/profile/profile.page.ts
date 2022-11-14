@@ -4,8 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { map } from 'rxjs/operators';
-import { NoParamCallback } from 'fs';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +18,7 @@ export class ProfilePage implements OnInit {
   numeroCartao: any;
   user: any;
   image: any;
+  paypal: any = false;
   cartao: string;
 
   constructor(private database : AngularFirestore, private authservice: AuthService, private afDB: AngularFireDatabase) {
@@ -34,15 +33,16 @@ export class ProfilePage implements OnInit {
           this.numeroCartao = this.user.numeroCartao;
           this.isStudent = this.user.isStudent;
           this.displayName = this.user.displayName;
+          if(this.isStudent){
+            this.cartao = 'Bilhete Estudante';
+            this.image = 'assets/images/estudante-antigo.jpg'
+          }
+          else{
+            this.cartao = 'Bilhete Comum'
+            this.image = 'assets/images/comum.jpg'
+          }
+          this.paypal = this.user.paypalIntegration ? 'Cadastrado' : 'Não Cadastrado';
         })
-      }
-      if(this.isStudent){
-        this.cartao = 'Bilhete Estudante';
-        this.image = 'assets/images/estudante-antigo.jpg'
-      }
-      else{
-        this.cartao = 'Bilhete Comum'
-        this.image = 'assets/images/comum.jpg'
       }
     })
    }

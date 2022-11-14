@@ -1,12 +1,47 @@
 ion-content{
-    --ion-background-color: #31364b;
+    --ion-background-color:#31364b;
 }
 
-.wrappContent{
-    height: 100%;
+
+ion-header{
+     --ion-background-color:#31364b;
+     background-color: #31364b;
+}
+
+ion-toolbar{
+    --ion-background-color:#31364b; 
+    --opacity:0;
+}
+
+ion-title{
+       font-size: 10px;
+       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+       font-style: normal;
+       font-weight: lighter;
+       color:#fff;
+       background-color: #31364b;
+}
+
+ion-button{
+    font-size: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+    font-weight: lighter;
+    color:#fff;
+    background-color: #31364b;
+
+}
+
+.botaoModal{
+    font-size: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+    font-weight: lighter;
+    color:#fff;
+    background-color: #31364b;
     width: 100%;
+}
+
+.texto-centralizado{
     text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
 }
