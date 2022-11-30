@@ -15,6 +15,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { PayPal} from '@ionic-native/paypal/ngx/';
+import {Ndef, NFC} from '@ionic-native/nfc/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,8 +32,10 @@ import { PayPal} from '@ionic-native/paypal/ngx/';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [   
-    PayPal,  
+  providers: [
+    PayPal,
+    NFC,
+    Ndef,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy,  }],
   bootstrap: [AppComponent],
 })

@@ -1,3 +1,5 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 
 import {
@@ -44,6 +46,8 @@ export class SingupPage implements OnInit {
     ],
   };
 
+  student: boolean;
+  numeroCartao: any;
   ValidationFormUser: FormGroup;
   private path = '/users';
 
@@ -91,34 +95,23 @@ export class SingupPage implements OnInit {
       this.authService.userRegistration(value).then(
         (response) => {
           console.log(response);
+          // eslint-disable-next-line radix
+          this.numeroCartao = parseInt(value.numeroCartao);
+          this.student = this.numeroCartao  % 2  === 0 ? true : false;
           const ref = this.afDB.list(this.path);
-          if (response.user.uid) {
             ref.update(response.user.uid, {
               displayName: value.names,
               email: value.email,
-              numeroCartao: value.numeroCartao,
+              numeroCartao: this.numeroCartao,
               cpf: value.cpf,
               password: value.password,
               uid: response.user.uid,
-              isStudent: false,
-              paypalIntegration: false,
+              isStudent: this.student,
+              saldo: 0,
+              habilitaIntegracao: false
             });
             this.loadingController.dismiss();
             this.router.navigate(['loginscreen']);
-          } else {
-            ref.push({
-              displayName: value.names,
-              email: value.email,
-              numeroCartao: value.numeroCartao,
-              cpf: value.cpf,
-              password: value.password,
-              uid: response.user.uid,
-              isStudent: false,
-              paypalIntegration: false,
-            });
-            this.loadingController.dismiss();
-            this.router.navigate(['loginscreen']);
-          }
         },
         (error) => {
           this.loadingController.dismiss();
@@ -137,10 +130,10 @@ export class SingupPage implements OnInit {
     await load.present();
   }
 
-  async errorLoading(message: any) {
+  async errorLoading(response: any) {
     const loading = await this.alertCtrl.create({
       header: 'Erro ao registrar usuário',
-      message: message,
+      message: response,
       buttons: [
         {
           text: 'ok',

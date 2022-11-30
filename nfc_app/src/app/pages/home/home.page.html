@@ -5,11 +5,26 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <p class="texto-centralizado">Entre com sua conta do PayPal</p>
-  <ion-button id="open-modal" expand="block">Login</ion-button>
 
-  <p class="texto-centralizado">Pagar Passagem</p>
-  <ion-button ion-button expand="block" (click)="comprar()">Pagar</ion-button>
+  <ion-card>
+    <ion-img src="assets/images/sptrans.png"></ion-img>
+    <ion-card-header class="texto-centralizado">
+      <ion-card-subtitle>Recarregue seu saldo utilizando sua conta do PayPal</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Seu Saldo: {{cifrao}}{{saldo}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="page-flex-align" padding>
+    <div class="top-content">
+      <div id="paypal-button"></div>
+   </div>
+  </div>  
+
+  <div style="display: flex; justify-content: center;">
+    <ion-button id="open-modal">Recarregar Saldo</ion-button>
+  </div>
 
   <ion-modal #modal trigger="open-modal" [swipeToClose]="true" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
     <ng-template>
@@ -18,9 +33,19 @@
           <ion-title>PayPal</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
-        <p>Faça o login com sua conta do PayPal</p>
-        <ion-button class="botaoModal" (click)="modal.dismiss()">Cancelar</ion-button>
+      <ion-content class="ion-padding; texto-centralizado">
+        <p>Digite no campo abaixo quantos tickets serão adicionados a conta. <br> O valor Unitário é de: R${{valorPassagem}}</p>
+        <ion-input type="number" placeholder="Bilhetes" [(ngModel)]="tickets" (ngModelChange)="setValorCarregado()"></ion-input>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button class="botaoModal" (click)="modal.dismiss(messageRecarga)">Recarregar</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button class="botaoModal" color="danger" (click)="modal.dismiss(messageCancelar)">Cancelar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-content>
     </ng-template>
   </ion-modal>

@@ -12,7 +12,7 @@
     <ion-card-content>
       <form
         [formGroup]="validationFormUser"
-        (ngSubmit)="LoginUser(validationFormUser.value)"
+        (ngSubmit)="loginUser(validationFormUser.value)"
       >
         <div class="wrap-forms">
           <ion-item>
@@ -72,16 +72,6 @@
             [disabled]="!validationFormUser.valid"
           >
             Entrar
-          </ion-button>
-        </div>
-
-        <div class="text-tag">
-          <span>Ou entre pelas midias sociais</span>
-        </div>
-
-        <div class="social-btns">
-          <ion-button fill="clear" class="loginbtn ion-no-padding" (click)="loginGoogle()">
-            <ion-img src="assets/images/google.png"></ion-img>
           </ion-button>
         </div>
       </form>

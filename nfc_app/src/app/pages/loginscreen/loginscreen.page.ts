@@ -14,19 +14,20 @@ export class LoginscreenPage implements OnInit {
 
   validationUserMessage={
     email:[
-      {type:"required", message:"Por favor entre com seu Email"},
-      {type:"pattern", message:"O email inserido está incorreto."},
+      {type:'required', message:'Por favor entre com seu Email'},
+      {type:'pattern', message:'O email inserido está incorreto.'},
     ],
     password:[
-      {type:"required", message:"Por favor entre com sua senha"},
-      {type:"minlength", message:"A senha inserida precisa ter no mínimo 8 caracteres."},
+      {type:'required', message:'Por favor entre com sua senha'},
+      {type:'minlength', message:'A senha inserida precisa ter no mínimo 8 caracteres.'},
     ],
-  }
+  };
 
   validationFormUser: FormGroup;
   private path = '/users';
 
-  constructor(public formBuilder: FormBuilder, public authService: AuthService, private router:Router, private nav: NavController, private alertCtrl: AlertController, private afDB: AngularFireDatabase) { }
+  // eslint-disable-next-line max-len
+  constructor(public formBuilder: FormBuilder, public authService: AuthService, private router: Router, private nav: NavController, private alertCtrl: AlertController, private afDB: AngularFireDatabase) { }
 
   ngOnInit() {
     this.validationFormUser = this.formBuilder.group({
@@ -38,10 +39,10 @@ export class LoginscreenPage implements OnInit {
         Validators.required,
         Validators.minLength(8)
       ]))
-    })
+    });
   }
 
-  LoginUser(value){
+  loginUser(value){
     try {
       this.authService.loginFireAuth(value).then(
         resp =>{
@@ -49,17 +50,17 @@ export class LoginscreenPage implements OnInit {
           this.authService.setUser({
             username : resp.user.displayName,
             uid: resp.user.uid
-          })
+          });
           this.router.navigate(['tabs']);
         }
-      )
+      );
     } catch (error) {
       console.log(error);
     }
   }
 
   registerUser(){
-    this.nav.navigateForward('singup')
+    this.nav.navigateForward('singup');
   }
 
   loginGoogle(){
@@ -92,14 +93,14 @@ export class LoginscreenPage implements OnInit {
           this.authService.setUser({
             username : resp.user.displayName,
             uid: resp.user.uid
-          })
+          });
           this.router.navigate(['tabs']);
           }
         },
         error =>{
           console.log(error);
         }
-      )
+      );
     }
     catch (error) {
       console.log(error);
@@ -123,7 +124,7 @@ export class LoginscreenPage implements OnInit {
             handler: () => {
                 console.log('Confirm Cancel');
             }
-        }, 
+        },
         {
             text: 'Ok',
             handler: (data) => {
@@ -147,7 +148,7 @@ export class LoginscreenPage implements OnInit {
           console.log(error);
           this.alertResetFailed(error.message);
         }
-      )
+      );
     } catch (error) {
       console.log(error);
     }
